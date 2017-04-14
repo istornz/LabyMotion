@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -53,9 +54,9 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
     }
 
     @Override
-    protected void onDraw(Canvas pCanvas) {
+    public void draw(Canvas pCanvas) {
         // Draw background
-        pCanvas.drawColor(Color.GREEN);
+        pCanvas.drawColor(Color.BLUE);
         if(mBlocks != null) {
             // Draw blocs
             for(Bloc b : mBlocks) {
