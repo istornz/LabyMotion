@@ -1,9 +1,8 @@
-package dimitri_dessus.labymotion;
+package dimitri_dessus.labymotion.engines;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Service;
 import android.graphics.RectF;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -18,7 +17,7 @@ import dimitri_dessus.labymotion.models.Bloc.Type;
  * Created by Dimitri on 14/04/2017.
  */
 
-public class GameEngine {
+public class PhysicalGameEngine {
     private Ball mBall = null;
     public Ball getBall() {
         return mBall;
@@ -54,7 +53,7 @@ public class GameEngine {
         }
     };
 
-    public GameEngine() {
+    public PhysicalGameEngine() {
         mAccelerometer = mManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
