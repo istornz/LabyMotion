@@ -3,12 +3,14 @@ package dimitri_dessus.labymotion.engines;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Service;
 import android.graphics.RectF;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import dimitri_dessus.labymotion.GameActivity;
 import dimitri_dessus.labymotion.models.Ball;
 import dimitri_dessus.labymotion.models.Bloc;
 import dimitri_dessus.labymotion.models.Bloc.Type;
@@ -29,6 +31,8 @@ public class PhysicalGameEngine {
 
     private List<Bloc> mBlocks = null;
 
+    private GameActivity mActivity = null;
+
     private SensorManager mManager = null;
     private Sensor mAccelerometer = null;
 
@@ -43,7 +47,26 @@ public class PhysicalGameEngine {
                 // Updating ball coordinates
                 RectF hitBox = mBall.putXAndY(x, y);
 
+                for(Bloc block : mBlocks) {
+                    // Create a new bloc
+                    RectF inter = new RectF(block.getRectangle());
+                    if(inter.intersect(hitBox)) {
+                        // Detect type of bloc
+                        switch(block.getType()) {
+                            case HOLE:
+                                mActivity.showDialog(GameActivity.DEFEAT_DIALOG);
+                                break;
 
+                            case START:
+                                break;
+
+                            case END:
+                                mActivity.showDialog(GameActivity.VICTORY_DIALOG);
+                                break;
+                        }
+                        break;
+                    }
+                }
             }
         }
 
@@ -53,7 +76,9 @@ public class PhysicalGameEngine {
         }
     };
 
-    public PhysicalGameEngine() {
+    public PhysicalGameEngine(GameActivity pView) {
+        mActivity = pView;
+        mManager = (SensorManager) mActivity.getBaseContext().getSystemService(Service.SENSOR_SERVICE);
         mAccelerometer = mManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
@@ -74,7 +99,7 @@ public class PhysicalGameEngine {
 
     // Build terrain
     public List<Bloc> buildLabyrinthe() {
-        mBlocks = new ArrayList<Bloc>();
+        mBlocks = new ArrayList<>();
         mBlocks.add(new Bloc(Type.HOLE, 0, 0));
         mBlocks.add(new Bloc(Type.HOLE, 0, 1));
         mBlocks.add(new Bloc(Type.HOLE, 0, 2));
