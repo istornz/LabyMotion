@@ -7,7 +7,7 @@ import android.graphics.RectF;
  */
 
 public class Bloc {
-    enum  Type { HOLE, START, END };
+    public enum  Type { HOLE, START, END };
 
     private float SIZE = Ball.RADIUS * 2;
 
