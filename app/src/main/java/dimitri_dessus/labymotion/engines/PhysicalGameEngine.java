@@ -54,14 +54,14 @@ public class PhysicalGameEngine {
                         // Detect type of bloc
                         switch(block.getType()) {
                             case HOLE:
-                                mActivity.showDialog(GameActivity.DEFEAT_DIALOG);
+                                mActivity.showInfoDialog(GameActivity.DEFEAT_DIALOG);
                                 break;
 
                             case START:
                                 break;
 
                             case END:
-                                mActivity.showDialog(GameActivity.VICTORY_DIALOG);
+                                mActivity.showInfoDialog(GameActivity.VICTORY_DIALOG);
                                 break;
                         }
                         break;

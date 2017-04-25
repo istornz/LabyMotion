@@ -1,8 +1,7 @@
 package dimitri_dessus.labymotion;
 
-import android.app.Dialog;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -54,10 +53,13 @@ public class GameActivity extends AppCompatActivity {
         super.onPause();
         mEngine.stop();
     }
-    
-    @Override
-    public Dialog onCreateDialog (int id) {
+
+    public void showInfoDialog(int id) {
+        // Show dialog when event triggered
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        mEngine.stop();
+
         switch(id) {
             case VICTORY_DIALOG:
                 builder.setCancelable(false)
@@ -84,12 +86,7 @@ public class GameActivity extends AppCompatActivity {
                             }
                         });
         }
-        return builder.create();
-    }
 
-    @Override
-    public void onPrepareDialog (int id, Dialog box) {
-        // When a dialog box is triggered, stop the game
-        mEngine.stop();
+        builder.show();
     }
 }

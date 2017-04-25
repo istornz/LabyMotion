@@ -56,6 +56,7 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
     @Override
     public void draw(Canvas pCanvas) {
         super.draw(pCanvas);
+
         // Draw background
         pCanvas.drawColor(Color.BLUE);
         if(mBlocks != null) {
