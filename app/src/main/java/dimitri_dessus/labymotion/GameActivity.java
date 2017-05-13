@@ -34,6 +34,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
     // Definition of PhysicalEngine object
     private PhysicalGameEngine mEngine = null;
+    private GraphicGameEngine mView = null;
 
     // Sensors
     private SensorManager mSensorManager;
@@ -51,9 +52,9 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         mLuminositySensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 
         // Init graphic game engine
-        GraphicGameEngine mView = new GraphicGameEngine(this);
-        setContentView(mView);
+        mView = new GraphicGameEngine(this);
         mEngine = new PhysicalGameEngine(this);
+        setContentView(mView);
 
         // Change here radius according to screen height
         DisplayMetrics metrics = new DisplayMetrics();
@@ -134,6 +135,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         if(sensorEvent.sensor.getType() == Sensor.TYPE_LIGHT) {
             mLuminosity = sensorEvent.values[0];
             Log.d(TAG, "Luminosity val -> " + mLuminosity);
+            mView.setSurfaceBgColor(mLuminosity);
         }
     }
 
