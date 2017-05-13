@@ -8,6 +8,9 @@
     <uses-feature
         android:name="android.hardware.sensor.light"
         android:required="true" />
+    <uses-feature
+        android:name="android.hardware.sensor.compass"
+        android:required="true" />
 
     <application
         android:allowBackup="true"

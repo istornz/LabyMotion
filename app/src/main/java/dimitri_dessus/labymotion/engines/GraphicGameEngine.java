@@ -28,7 +28,7 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
     private final Paint mPaint;
 
     private Ball mBall;
-    private int surfaceBgColor = Color.BLUE;
+    private int surfaceBgColor = Color.CYAN;
     private List<Bloc> mBlocks = null;
 
     public GraphicGameEngine(Context pContext) {
@@ -69,7 +69,7 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
 
         // Draw ball
         if(mBall != null) {
-            mPaint.setColor(Ball.COLOR);
+            mPaint.setColor(mBall.getBallColor());
             pCanvas.drawCircle(mBall.getX(), mBall.getY(), Ball.RADIUS, mPaint);
         }
     }

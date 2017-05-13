@@ -2,6 +2,7 @@ package dimitri_dessus.labymotion.models;
 
 import android.graphics.Color;
 import android.graphics.RectF;
+import android.util.Log;
 
 /**
  * Created by Dimitri on 14/04/2017.
@@ -11,7 +12,7 @@ import android.graphics.RectF;
 public class Ball {
     // Radius of the ball
     public static float RADIUS = 10.0f;
-    public static final int COLOR = Color.GREEN;
+    private int ballColor = Color.GREEN;
 
     // Max speed of ball
     private static final float MAX_SPEED = 20.0f;
@@ -131,5 +132,25 @@ public class Ball {
         mSpeedY = 0;
         this.mX = mInitialRectangle.left + RADIUS;
         this.mY = mInitialRectangle.top + RADIUS;
+    }
+
+    public int getBallColor() {
+        return ballColor;
+    }
+
+    public void setBallColor(double magneticField) {
+
+        int color;
+        if(magneticField <= 100.0f) {
+            color = Color.parseColor("#66ff33");
+        } else if (magneticField > 100.0f && magneticField <= 200.0f) {
+            color = Color.parseColor("#ff0066");
+        } else if (magneticField > 200.0f && magneticField <= 300.0f) {
+            color = Color.parseColor("#ff66ff");
+        } else {
+            color = Color.parseColor("#9900ff");
+        }
+
+        this.ballColor = color;
     }
 }

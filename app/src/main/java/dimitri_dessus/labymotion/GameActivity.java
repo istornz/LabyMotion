@@ -32,16 +32,19 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     // Define screen height ratio
     private static final int SCREEN_HEIGHT_RATION = 143;
 
-    // Definition of PhysicalEngine object
+    // Definition of game objects
     private PhysicalGameEngine mEngine = null;
     private GraphicGameEngine mView = null;
+    private Ball mBall = null;
 
     // Sensors
     private SensorManager mSensorManager;
     private Sensor mLuminositySensor;
+    private Sensor mMagneticSensor;
 
     // Sensors vars
     private float mLuminosity;
+    private double mMagnetic;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         // Init sensor manager
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mLuminositySensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        mLuminositySensor   = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        mMagneticSensor     = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 
         // Init graphic game engine
         mView = new GraphicGameEngine(this);
@@ -63,9 +67,9 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         Ball.RADIUS = (metrics.heightPixels - SCREEN_HEIGHT_RATION) / GraphicGameEngine.SURFACE_RATIO;
 
         // Init ball
-        Ball b = new Ball();
-        mView.setBall(b);
-        mEngine.setBall(b);
+        mBall = new Ball();
+        mView.setBall(mBall);
+        mEngine.setBall(mBall);
 
         // Build the labyrinthe
         List<Bloc> mList = mEngine.buildLabyrinthe();
@@ -81,6 +85,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         // Register listener
         mSensorManager.registerListener(this, mLuminositySensor, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mMagneticSensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
@@ -132,10 +137,18 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        if(sensorEvent.sensor.getType() == Sensor.TYPE_LIGHT) {
-            mLuminosity = sensorEvent.values[0];
-            Log.d(TAG, "Luminosity val -> " + mLuminosity);
-            mView.setSurfaceBgColor(mLuminosity);
+
+        switch (sensorEvent.sensor.getType()) {
+            case Sensor.TYPE_LIGHT:
+                mLuminosity = sensorEvent.values[0];
+                mView.setSurfaceBgColor(mLuminosity);
+                break;
+            case Sensor.TYPE_MAGNETIC_FIELD:
+                float xMagnetic = sensorEvent.values[0];
+                float yMagnetic = sensorEvent.values[1];
+                float zMagnetic = sensorEvent.values[2];
+                mMagnetic = Math.sqrt((double)(xMagnetic*xMagnetic + yMagnetic*yMagnetic + zMagnetic*zMagnetic));
+                mBall.setBallColor(mMagnetic);
         }
     }
 
