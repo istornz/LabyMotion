@@ -10,6 +10,7 @@ import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ import dimitri_dessus.labymotion.models.Ball;
 import dimitri_dessus.labymotion.models.Bloc;
 
 public class GameActivity extends AppCompatActivity implements SensorEventListener {
+
+    private static final String TAG = "Game";
 
     // Id of the victory dialog
     public static final int VICTORY_DIALOG = 0;
@@ -34,7 +37,10 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
     // Sensors
     private SensorManager mSensorManager;
-    private Sensor mLuminosity;
+    private Sensor mLuminositySensor;
+
+    // Sensors vars
+    private float mLuminosity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +48,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         // Init sensor manager
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mLuminosity = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        mLuminositySensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 
         // Init graphic game engine
         GraphicGameEngine mView = new GraphicGameEngine(this);
@@ -73,7 +79,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         mEngine.resume();
 
         // Register listener
-        mSensorManager.registerListener(this, mLuminosity, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mLuminositySensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
@@ -125,7 +131,10 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-
+        if(sensorEvent.sensor.getType() == Sensor.TYPE_LIGHT) {
+            mLuminosity = sensorEvent.values[0];
+            Log.d(TAG, "Luminosity val -> " + mLuminosity);
+        }
     }
 
     @Override
