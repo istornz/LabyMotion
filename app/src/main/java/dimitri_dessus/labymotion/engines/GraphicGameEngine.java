@@ -15,10 +15,11 @@ import dimitri_dessus.labymotion.models.Bloc;
 
 /**
  * Created by Dimitri on 14/04/2017.
+ * LabyMotion
  */
 
 public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Callback {
-    Ball mBall;
+    private Ball mBall;
     public Ball getBall() {
         return mBall;
     }
@@ -27,8 +28,8 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
     }
     public static final int SURFACE_RATIO = 28;
 
-    SurfaceHolder mSurfaceHolder;
-    DrawingThread mThread;
+    private final SurfaceHolder mSurfaceHolder;
+    private DrawingThread mThread;
 
     private List<Bloc> mBlocks = null;
     public List<Bloc> getBlocks() {
@@ -39,7 +40,7 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
         this.mBlocks = pBlocks;
     }
 
-    Paint mPaint;
+    private Paint mPaint;
 
     public GraphicGameEngine(Context pContext) {
         super(pContext);
@@ -106,7 +107,9 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
             try {
                 mThread.join();
                 retry = false;
-            } catch (InterruptedException e) {}
+            } catch (InterruptedException e) {
+                Log.d("GraphicGameEngine", "Error when destroying surface");
+            }
         }
 
     }
@@ -133,7 +136,9 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
                 // Set FPS (images per second) by using sleep method
                 try {
                     Thread.sleep(20);
-                } catch (InterruptedException e) {}
+                } catch (InterruptedException e) {
+                    Log.d("GraphicGameEngine", "Error executing sleep method");
+                }
             }
         }
     }

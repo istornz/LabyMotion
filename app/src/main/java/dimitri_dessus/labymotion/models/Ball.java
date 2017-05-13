@@ -5,6 +5,7 @@ import android.graphics.RectF;
 
 /**
  * Created by Dimitri on 14/04/2017.
+ * LabyMotion
  */
 
 public class Ball {
@@ -44,7 +45,7 @@ public class Ball {
     public float getX() {
         return mX;
     }
-    public void setPosX(float pPosX) {
+    private void setPosX(float pPosX) {
         mX = pPosX;
 
         // If ball out of bounds, bounce direction
@@ -64,7 +65,7 @@ public class Ball {
         return mY;
     }
 
-    public void setPosY(float pPosY) {
+    private void setPosY(float pPosY) {
         mY = pPosY;
         if(mY < RADIUS) {
             mY = RADIUS;

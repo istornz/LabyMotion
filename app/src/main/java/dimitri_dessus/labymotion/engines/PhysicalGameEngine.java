@@ -17,6 +17,7 @@ import dimitri_dessus.labymotion.models.Bloc.Type;
 
 /**
  * Created by Dimitri on 14/04/2017.
+ * LabyMotion
  */
 
 public class PhysicalGameEngine {
@@ -36,7 +37,7 @@ public class PhysicalGameEngine {
     private SensorManager mManager = null;
     private Sensor mAccelerometer = null;
 
-    SensorEventListener mSensorEventListener = new SensorEventListener() {
+    private SensorEventListener mSensorEventListener = new SensorEventListener() {
 
         @Override
         public void onSensorChanged(SensorEvent pEvent) {
