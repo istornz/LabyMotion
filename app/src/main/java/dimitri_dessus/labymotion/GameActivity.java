@@ -2,8 +2,12 @@ package dimitri_dessus.labymotion;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
 
 import java.util.List;
 
@@ -20,6 +24,9 @@ public class GameActivity extends AppCompatActivity {
     // Id of the defeat dialog
     public static final int DEFEAT_DIALOG = 1;
 
+    // Define screen height ratio
+    public static final int SCREEN_HEIGHT_RATION = 143;
+
     // Definition of GraphicEngine object
     private GraphicGameEngine mView = null;
     // Definition of PhysicalEngine object
@@ -33,6 +40,12 @@ public class GameActivity extends AppCompatActivity {
         setContentView(mView);
 
         mEngine = new PhysicalGameEngine(this);
+
+        // Change here radius according to screen height
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        Ball.RADIUS = (metrics.heightPixels - SCREEN_HEIGHT_RATION) / GraphicGameEngine.SURFACE_RATIO;
 
         Ball b = new Ball();
         mView.setBall(b);

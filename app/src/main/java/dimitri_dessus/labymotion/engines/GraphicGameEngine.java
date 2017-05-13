@@ -22,10 +22,10 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
     public Ball getBall() {
         return mBall;
     }
-
     public void setBall(Ball pBall) {
         this.mBall = pBall;
     }
+    public static final int SURFACE_RATIO = 28;
 
     SurfaceHolder mSurfaceHolder;
     DrawingThread mThread;
