@@ -19,28 +19,17 @@ import dimitri_dessus.labymotion.models.Bloc;
  */
 
 public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Callback {
-    private Ball mBall;
-    public Ball getBall() {
-        return mBall;
-    }
-    public void setBall(Ball pBall) {
-        this.mBall = pBall;
-    }
+
+    private static final String TAG = "GraphicGameEngine";
     public static final int SURFACE_RATIO = 28;
 
     private final SurfaceHolder mSurfaceHolder;
     private final DrawingThread mThread;
-
-    private List<Bloc> mBlocks = null;
-    public List<Bloc> getBlocks() {
-        return mBlocks;
-    }
-
-    public void setBlocks(List<Bloc> pBlocks) {
-        this.mBlocks = pBlocks;
-    }
-
     private final Paint mPaint;
+
+    private Ball mBall;
+    private int surfaceBgColor = Color.BLUE;
+    private List<Bloc> mBlocks = null;
 
     public GraphicGameEngine(Context pContext) {
         super(pContext);
@@ -59,7 +48,7 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
         super.draw(pCanvas);
 
         // Draw background
-        pCanvas.drawColor(Color.BLUE);
+        pCanvas.drawColor(this.surfaceBgColor);
         if(mBlocks != null) {
             // Draw blocs
             for(Bloc b : mBlocks) {
@@ -108,7 +97,7 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
                 mThread.join();
                 retry = false;
             } catch (InterruptedException e) {
-                Log.d("GraphicGameEngine", "Error when destroying surface");
+                Log.d(TAG, "Error when destroying surface");
             }
         }
 
@@ -137,9 +126,41 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
                 try {
                     Thread.sleep(20);
                 } catch (InterruptedException e) {
-                    Log.d("GraphicGameEngine", "Error executing sleep method");
+                    Log.d(TAG, "Error executing sleep method");
                 }
             }
         }
+    }
+
+    public Ball getBall() {
+        return mBall;
+    }
+
+    public void setBall(Ball pBall) {
+        this.mBall = pBall;
+    }
+
+    public List<Bloc> getBlocks() {
+        return mBlocks;
+    }
+
+    public void setBlocks(List<Bloc> pBlocks) {
+        this.mBlocks = pBlocks;
+    }
+
+    public void setSurfaceBgColor(float luminosity) {
+
+        int color;
+        if(luminosity <= 100.0f) {
+            color = Color.GRAY;
+        } else if (luminosity > 100.0f && luminosity <= 200.0f) {
+            color = Color.BLUE;
+        } else if (luminosity > 200.0f && luminosity <= 290.0f) {
+            color = Color.CYAN;
+        } else {
+            color = Color.YELLOW;
+        }
+
+        this.surfaceBgColor = color;
     }
 }
