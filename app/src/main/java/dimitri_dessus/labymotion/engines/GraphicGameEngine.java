@@ -19,7 +19,10 @@ import dimitri_dessus.labymotion.models.Bloc;
  */
 
 public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Callback {
+    
+    private static final String TAG = "GraphicGameEngine";
     private Ball mBall;
+
     public Ball getBall() {
         return mBall;
     }
@@ -108,7 +111,7 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
                 mThread.join();
                 retry = false;
             } catch (InterruptedException e) {
-                Log.d("GraphicGameEngine", "Error when destroying surface");
+                Log.d(TAG, "Error when destroying surface");
             }
         }
 
@@ -137,7 +140,7 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
                 try {
                     Thread.sleep(20);
                 } catch (InterruptedException e) {
-                    Log.d("GraphicGameEngine", "Error executing sleep method");
+                    Log.d(TAG, "Error executing sleep method");
                 }
             }
         }
