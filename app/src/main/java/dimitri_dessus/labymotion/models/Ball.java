@@ -5,17 +5,13 @@ import android.graphics.RectF;
 
 /**
  * Created by Dimitri on 14/04/2017.
+ * LabyMotion
  */
 
 public class Ball {
     // Radius of the ball
     public static float RADIUS = 10.0f;
-
-    // Ball color
-    private int mColor = Color.GREEN;
-    public int getColor() {
-        return mColor;
-    }
+    public static final int COLOR = Color.GREEN;
 
     // Max speed of ball
     private static final float MAX_SPEED = 20.0f;
@@ -44,7 +40,7 @@ public class Ball {
     public float getX() {
         return mX;
     }
-    public void setPosX(float pPosX) {
+    private void setPosX(float pPosX) {
         mX = pPosX;
 
         // If ball out of bounds, bounce direction
@@ -64,7 +60,7 @@ public class Ball {
         return mY;
     }
 
-    public void setPosY(float pPosY) {
+    private void setPosY(float pPosY) {
         mY = pPosY;
         if(mY < RADIUS) {
             mY = RADIUS;
