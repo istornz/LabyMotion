@@ -10,8 +10,6 @@ import android.graphics.RectF;
 public class Bloc {
     public enum  Type { HOLE, START, END }
 
-    private float SIZE = Ball.RADIUS * 2;
-
     private Type mType = null;
     private RectF mRectangle = null;
 
@@ -25,6 +23,7 @@ public class Bloc {
 
     public Bloc(Type pType, int pX, int pY) {
         this.mType = pType;
-        this.mRectangle = new RectF(pX * SIZE, pY * SIZE, (pX + 1) * SIZE, (pY + 1) * SIZE);
+        float blocSize = Ball.RADIUS * 2;
+        this.mRectangle = new RectF(pX * blocSize, pY * blocSize, (pX + 1) * blocSize, (pY + 1) * blocSize);
     }
 }

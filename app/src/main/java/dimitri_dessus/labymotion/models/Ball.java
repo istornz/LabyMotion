@@ -12,10 +12,8 @@ public class Ball {
     // Radius of the ball
     public static float RADIUS = 10.0f;
 
-    // Ball color
-    private int mColor = Color.GREEN;
     public int getColor() {
-        return mColor;
+        return Color.GREEN;
     }
 
     // Max speed of ball

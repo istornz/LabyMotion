@@ -24,8 +24,6 @@ public class GameActivity extends AppCompatActivity {
     // Define screen height ratio
     private static final int SCREEN_HEIGHT_RATION = 143;
 
-    // Definition of GraphicEngine object
-    private GraphicGameEngine mView = null;
     // Definition of PhysicalEngine object
     private PhysicalGameEngine mEngine = null;
 
@@ -33,7 +31,7 @@ public class GameActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mView = new GraphicGameEngine(this);
+        GraphicGameEngine mView = new GraphicGameEngine(this);
         setContentView(mView);
 
         mEngine = new PhysicalGameEngine(this);
