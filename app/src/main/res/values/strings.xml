@@ -3,6 +3,6 @@
     <string name="victory_title">You have won !</string>
     <string name="victory_msg">You are the champion !</string>
     <string name="restart_game">I want to restart !</string>
-    <string name="defeat_title">You have lost ...</string>
+    <string name="defeat_title">You have lost …</string>
     <string name="defeat_msg">But you can try again if you want :)</string>
 </resources>

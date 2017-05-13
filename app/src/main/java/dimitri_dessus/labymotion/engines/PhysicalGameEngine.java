@@ -37,7 +37,7 @@ public class PhysicalGameEngine {
     private SensorManager mManager = null;
     private Sensor mAccelerometer = null;
 
-    private SensorEventListener mSensorEventListener = new SensorEventListener() {
+    private final SensorEventListener mSensorEventListener = new SensorEventListener() {
 
         @Override
         public void onSensorChanged(SensorEvent pEvent) {

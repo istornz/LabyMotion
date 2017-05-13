@@ -29,7 +29,7 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
     public static final int SURFACE_RATIO = 28;
 
     private final SurfaceHolder mSurfaceHolder;
-    private DrawingThread mThread;
+    private final DrawingThread mThread;
 
     private List<Bloc> mBlocks = null;
     public List<Bloc> getBlocks() {
@@ -40,7 +40,7 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
         this.mBlocks = pBlocks;
     }
 
-    private Paint mPaint;
+    private final Paint mPaint;
 
     public GraphicGameEngine(Context pContext) {
         super(pContext);
@@ -80,7 +80,7 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
 
         // Draw ball
         if(mBall != null) {
-            mPaint.setColor(mBall.getColor());
+            mPaint.setColor(Ball.COLOR);
             pCanvas.drawCircle(mBall.getX(), mBall.getY(), Ball.RADIUS, mPaint);
         }
     }

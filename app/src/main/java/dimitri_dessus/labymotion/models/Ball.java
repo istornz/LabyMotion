@@ -11,10 +11,7 @@ import android.graphics.RectF;
 public class Ball {
     // Radius of the ball
     public static float RADIUS = 10.0f;
-
-    public int getColor() {
-        return Color.GREEN;
-    }
+    public static final int COLOR = Color.GREEN;
 
     // Max speed of ball
     private static final float MAX_SPEED = 20.0f;
