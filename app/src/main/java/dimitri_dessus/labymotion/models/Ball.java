@@ -9,7 +9,7 @@ import android.graphics.RectF;
 
 public class Ball {
     // Radius of the ball
-    public static final int RADIUS = 10;
+    public static float RADIUS = 10.0f;
 
     // Ball color
     private int mColor = Color.GREEN;

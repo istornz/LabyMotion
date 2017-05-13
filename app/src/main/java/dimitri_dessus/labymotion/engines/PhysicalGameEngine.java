@@ -1,4 +1,4 @@
-package dimitri_dessus.labymotion;
+package dimitri_dessus.labymotion.engines;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import dimitri_dessus.labymotion.GameActivity;
 import dimitri_dessus.labymotion.models.Ball;
 import dimitri_dessus.labymotion.models.Bloc;
 import dimitri_dessus.labymotion.models.Bloc.Type;
@@ -18,7 +19,7 @@ import dimitri_dessus.labymotion.models.Bloc.Type;
  * Created by Dimitri on 14/04/2017.
  */
 
-public class GameEngine {
+public class PhysicalGameEngine {
     private Ball mBall = null;
     public Ball getBall() {
         return mBall;
@@ -29,6 +30,8 @@ public class GameEngine {
     }
 
     private List<Bloc> mBlocks = null;
+
+    private GameActivity mActivity = null;
 
     private SensorManager mManager = null;
     private Sensor mAccelerometer = null;
@@ -44,7 +47,26 @@ public class GameEngine {
                 // Updating ball coordinates
                 RectF hitBox = mBall.putXAndY(x, y);
 
+                for(Bloc block : mBlocks) {
+                    // Create a new bloc
+                    RectF inter = new RectF(block.getRectangle());
+                    if(inter.intersect(hitBox)) {
+                        // Detect type of bloc
+                        switch(block.getType()) {
+                            case HOLE:
+                                mActivity.showInfoDialog(GameActivity.DEFEAT_DIALOG);
+                                break;
 
+                            case START:
+                                break;
+
+                            case END:
+                                mActivity.showInfoDialog(GameActivity.VICTORY_DIALOG);
+                                break;
+                        }
+                        break;
+                    }
+                }
             }
         }
 
@@ -54,7 +76,9 @@ public class GameEngine {
         }
     };
 
-    public GameEngine() {
+    public PhysicalGameEngine(GameActivity pView) {
+        mActivity = pView;
+        mManager = (SensorManager) mActivity.getBaseContext().getSystemService(Service.SENSOR_SERVICE);
         mAccelerometer = mManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
@@ -75,7 +99,7 @@ public class GameEngine {
 
     // Build terrain
     public List<Bloc> buildLabyrinthe() {
-        mBlocks = new ArrayList<Bloc>();
+        mBlocks = new ArrayList<>();
         mBlocks.add(new Bloc(Type.HOLE, 0, 0));
         mBlocks.add(new Bloc(Type.HOLE, 0, 1));
         mBlocks.add(new Bloc(Type.HOLE, 0, 2));
