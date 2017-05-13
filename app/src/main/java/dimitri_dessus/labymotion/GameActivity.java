@@ -1,7 +1,12 @@
 package dimitri_dessus.labymotion;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -13,7 +18,7 @@ import dimitri_dessus.labymotion.engines.PhysicalGameEngine;
 import dimitri_dessus.labymotion.models.Ball;
 import dimitri_dessus.labymotion.models.Bloc;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements SensorEventListener {
 
     // Id of the victory dialog
     public static final int VICTORY_DIALOG = 0;
@@ -27,13 +32,21 @@ public class GameActivity extends AppCompatActivity {
     // Definition of PhysicalEngine object
     private PhysicalGameEngine mEngine = null;
 
+    // Sensors
+    private SensorManager mSensorManager;
+    private Sensor mLuminosity;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Init sensor manager
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mLuminosity = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+
+        // Init graphic game engine
         GraphicGameEngine mView = new GraphicGameEngine(this);
         setContentView(mView);
-
         mEngine = new PhysicalGameEngine(this);
 
         // Change here radius according to screen height
@@ -42,10 +55,12 @@ public class GameActivity extends AppCompatActivity {
 
         Ball.RADIUS = (metrics.heightPixels - SCREEN_HEIGHT_RATION) / GraphicGameEngine.SURFACE_RATIO;
 
+        // Init ball
         Ball b = new Ball();
         mView.setBall(b);
         mEngine.setBall(b);
 
+        // Build the labyrinthe
         List<Bloc> mList = mEngine.buildLabyrinthe();
         mView.setBlocks(mList);
     }
@@ -53,13 +68,23 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        // Resume the game
         mEngine.resume();
+
+        // Register listener
+        mSensorManager.registerListener(this, mLuminosity, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+
+        // Stop the game
         mEngine.stop();
+
+        // Unregister the sensor listener
+        mSensorManager.unregisterListener(this);
     }
 
     public void showInfoDialog(int id) {
@@ -96,5 +121,15 @@ public class GameActivity extends AppCompatActivity {
         }
 
         builder.show();
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
     }
 }
