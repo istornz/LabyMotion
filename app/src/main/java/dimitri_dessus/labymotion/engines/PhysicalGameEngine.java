@@ -39,6 +39,14 @@ public class PhysicalGameEngine {
 
     private final SensorEventListener mSensorEventListener = new SensorEventListener() {
 
+        /**
+         * Sensor change event listener.
+         * Triggered when sensor capture data.
+         *
+         * @param pEvent Sensor event object.
+         * @return Nothing.
+         * @see SensorEvent
+         */
         @Override
         public void onSensorChanged(SensorEvent pEvent) {
             float x = pEvent.values[0];
@@ -71,34 +79,68 @@ public class PhysicalGameEngine {
             }
         }
 
+        /**
+         * Sensors accuracy change event listener
+         * Triggered when accuracy of sensor changed
+         *
+         * @param pSensor Sensor object.
+         * @param pAccuracy New accuracy value.
+         * @return Nothing.
+         * @see Sensor
+         */
         @Override
         public void onAccuracyChanged(Sensor pSensor, int pAccuracy) {
 
         }
     };
 
+    /**
+     * Constructor of PhysicalGameEngine class
+     *
+     * @param pView Main activity of the game.
+     * @return Nothing.
+     * @see GameActivity
+     */
     public PhysicalGameEngine(GameActivity pView) {
         mActivity = pView;
         mManager = (SensorManager) mActivity.getBaseContext().getSystemService(Service.SENSOR_SERVICE);
         mAccelerometer = mManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
-    // Reset ball's to original position
+    /**
+     * Reset ball to original position
+     *
+     * @return Nothing.
+     */
     public void reset() {
         mBall.reset();
     }
 
-    // Stop captor
+    /**
+     * Unregister event listener on captors
+     *
+     * @return Nothing.
+     */
     public void stop() {
         mManager.unregisterListener(mSensorEventListener, mAccelerometer);
     }
 
-    // Reset captor
+    /**
+     * Attach sensors to the event listener (to start tracking data)
+     *
+     * @return Nothing.
+     */
     public void resume() {
         mManager.registerListener(mSensorEventListener, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
     }
 
-    // Build terrain
+    /**
+     * Define list of bloc used to create pattern of the game
+     * Bloc are instantiated with type, X & Y values.
+     *
+     * @return Nothing.
+     * @see Bloc
+     */
     public List<Bloc> buildLabyrinthe() {
         mBlocks = new ArrayList<>();
         mBlocks.add(new Bloc(Type.HOLE, 0, 0));
