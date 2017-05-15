@@ -29,6 +29,24 @@ public class Ball {
     // Rect collision
     private RectF mRectangle = null;
 
+    // X coordinate
+    private float mX;
+
+    // Y coordinates
+    private float mY;
+
+    // Axis X speed
+    private float mSpeedX = 0;
+
+    // Axis Y speed
+    private float mSpeedY = 0;
+
+    // Screen width size
+    private int mWidth = -1;
+
+    // Screen height size
+    private int mHeight = -1;
+
     /**
      * Setter of initial rectangle (start point)
      *
@@ -42,8 +60,11 @@ public class Ball {
         this.mY = pInitialRectangle.top + RADIUS;
     }
 
-    // X coordinate
-    private float mX;
+    /**
+     * Get X position
+     *
+     * @return Nothing.
+     */
     public float getX() {
         return mX;
     }
@@ -68,8 +89,11 @@ public class Ball {
         }
     }
 
-    // Y coordinates
-    private float mY;
+    /**
+     * Get Y position
+     *
+     * @return Nothing.
+     */
     public float getY() {
         return mY;
     }
@@ -91,29 +115,44 @@ public class Ball {
         }
     }
 
-    // Axis X speed
-    private float mSpeedX = 0;
-    // X axis invert (when direction changed on bounds)
+    /**
+     * Invert X axis speed (when direction changed on bounds)
+     *
+     * @return Nothing.
+     * @see Ball
+     */
     public void changeXSpeed() {
         mSpeedX = -mSpeedX;
     }
 
-    // Axis Y speed
-    private float mSpeedY = 0;
-
-    // Y axis invert (when direction changed on bounds)
+    /**
+     * Invert Y axis speed (when direction changed on bounds)
+     *
+     * @return Nothing.
+     * @see Ball
+     */
     public void changeYSpeed() {
         mSpeedY = -mSpeedY;
     }
 
-    // Screen height size
-    private int mHeight = -1;
+    /**
+     * Set the height of the ball
+     *
+     * @param pHeight New height value of the ball
+     * @return Nothing.
+     * @see Ball
+     */
     public void setHeight(int pHeight) {
         this.mHeight = pHeight;
     }
 
-    // Screen width size
-    private int mWidth = -1;
+    /**
+     * Set the width of the ball
+     *
+     * @param pWidth New width value of the ball
+     * @return Nothing.
+     * @see Ball
+     */
     public void setWidth(int pWidth) {
         this.mWidth = pWidth;
     }
