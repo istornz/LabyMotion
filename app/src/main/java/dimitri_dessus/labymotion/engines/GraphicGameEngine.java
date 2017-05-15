@@ -31,6 +31,13 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
     private int surfaceBgColor = Color.CYAN;
     private List<Bloc> mBlocks = null;
 
+    /**
+     * Constructor of GraphicGameEngine class.
+     *
+     * @param pContext Context of the activity.
+     * @return Nothing.
+     * @see Context
+     */
     public GraphicGameEngine(Context pContext) {
         super(pContext);
         mSurfaceHolder = getHolder();
@@ -43,6 +50,14 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
         mBall = new Ball();
     }
 
+    /**
+     * Draw game design like surface & bloc color for ex.
+     * Method will be called on every frame calculated.
+     *
+     * @param pCanvas Canvas to draw.
+     * @return Nothing.
+     * @see Context
+     */
     @Override
     public void draw(Canvas pCanvas) {
         super.draw(pCanvas);
@@ -74,9 +89,26 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
         }
     }
 
+    /**
+     * Event triggered when surface change.
+     *
+     * @param pHolder New surface holder object.
+     * @param pFormat Format of the new surface.
+     * @param pWidth Width of the new surface.
+     * @param pHeight Height of the new surface.
+     * @return Nothing.
+     * @see SurfaceHolder
+     */
     @Override
     public void surfaceChanged(SurfaceHolder pHolder, int pFormat, int pWidth, int pHeight) { }
 
+    /**
+     * Event triggered when a new surface is created.
+     *
+     * @param pHolder New surface holder object.
+     * @return Nothing.
+     * @see SurfaceHolder
+     */
     @Override
     public void surfaceCreated(SurfaceHolder pHolder) {
         mThread.keepDrawing = true;
@@ -88,6 +120,13 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
         }
     }
 
+    /**
+     * Event triggered when surface is destroyed.
+     *
+     * @param pHolder Surface holder object.
+     * @return Nothing.
+     * @see SurfaceHolder
+     */
     @Override
     public void surfaceDestroyed(SurfaceHolder pHolder) {
         mThread.keepDrawing = false;
@@ -103,9 +142,18 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
 
     }
 
+    /**
+     * Thread used to launch draw process.
+     */
     private class DrawingThread extends Thread {
         boolean keepDrawing = true;
 
+        /**
+         * When the thread is started, run this method.
+         *
+         * @return Nothing.
+         * @see SurfaceHolder
+         */
         @Override
         public void run() {
             Canvas canvas;
@@ -132,22 +180,53 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
         }
     }
 
+    /**
+     * Getter of the Ball property object.
+     *
+     * @return The ball object.
+     * @see Ball
+     */
     public Ball getBall() {
         return mBall;
     }
 
+    /**
+     * Setter of the Ball property object.
+     *
+     * @param pBall New ball object
+     * @return Nothing.
+     * @see Ball
+     */
     public void setBall(Ball pBall) {
         this.mBall = pBall;
     }
 
+    /**
+     * Getter of all blocs (pattern of the game).
+     *
+     * @return Bloc list object as an array.
+     * @see Bloc
+     */
     public List<Bloc> getBlocks() {
         return mBlocks;
     }
 
+    /**
+     * Setter of all blocs (pattern of the game).
+     *
+     * @param pBlocks The list of bloc object (pattern of the game)
+     * @return The ball object.
+     * @see Bloc
+     */
     public void setBlocks(List<Bloc> pBlocks) {
         this.mBlocks = pBlocks;
     }
 
+    /**
+     * Set surface color according to luminosity level.
+     *
+     * @return Nothing.
+     */
     public void setSurfaceBgColor(float luminosity) {
 
         int color;
