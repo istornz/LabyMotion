@@ -26,21 +26,34 @@ public class Ball {
     // Rect used to set original position of the ball
     private RectF mInitialRectangle = null;
 
-    // Ball's initial position
+    // Rect collision
+    private RectF mRectangle = null;
+
+    /**
+     * Setter of initial rectangle (start point)
+     *
+     * @param pInitialRectangle Rectangle shape as starting point.
+     * @return Nothing.
+     * @see RectF
+     */
     public void setInitialRectangle(RectF pInitialRectangle) {
         this.mInitialRectangle = pInitialRectangle;
         this.mX = pInitialRectangle.left + RADIUS;
         this.mY = pInitialRectangle.top + RADIUS;
     }
 
-    // Rect collision
-    private RectF mRectangle = null;
-
     // X coordinate
     private float mX;
     public float getX() {
         return mX;
     }
+
+    /**
+     * Set X position (start point)
+     *
+     * @param pPosX X axis position.
+     * @return Nothing.
+     */
     private void setPosX(float pPosX) {
         mX = pPosX;
 
@@ -61,6 +74,12 @@ public class Ball {
         return mY;
     }
 
+    /**
+     * Set Y position (start point)
+     *
+     * @param pPosY Y axis position.
+     * @return Nothing.
+     */
     private void setPosY(float pPosY) {
         mY = pPosY;
         if(mY < RADIUS) {
@@ -99,11 +118,24 @@ public class Ball {
         this.mWidth = pWidth;
     }
 
+    /**
+     * Constructor of Ball object
+     *
+     * @return Nothing.
+     * @see Ball
+     */
     public Ball() {
         mRectangle = new RectF();
     }
 
-    // Set ball coordinate
+    /**
+     * Setting ball coordinate (X and Y).
+     *
+     * @param pX X axis.
+     * @param pY Y axis.
+     * @return New position as RectF.
+     * @see RectF
+     */
     public RectF putXAndY(float pX, float pY) {
         mSpeedX += pX / COMPENSATOR;
         if(mSpeedX > MAX_SPEED)
@@ -126,7 +158,11 @@ public class Ball {
         return mRectangle;
     }
 
-    // Reset ball to original position
+    /**
+     * Reset ball to original position
+     *
+     * @return Nothing.
+     */
     public void reset() {
         mSpeedX = 0;
         mSpeedY = 0;
@@ -134,10 +170,21 @@ public class Ball {
         this.mY = mInitialRectangle.top + RADIUS;
     }
 
+    /**
+     * Getter of the ball color
+     *
+     * @return Color value as integer.
+     */
     public int getBallColor() {
         return ballColor;
     }
 
+    /**
+     * Change ball color according to magnetic field level.
+     *
+     * @param magneticField Magnetic level captured by the device.
+     * @return Nothing.
+     */
     public void setBallColor(double magneticField) {
 
         int color;
