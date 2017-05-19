@@ -21,26 +21,17 @@ import dimitri_dessus.labymotion.models.Bloc.Type;
  */
 
 public class PhysicalGameEngine {
-    private Ball mBall = null;
-    public Ball getBall() {
-        return mBall;
-    }
 
-    public void setBall(Ball pBall) {
-        this.mBall = pBall;
-    }
-
-    private List<Bloc> mBlocks = null;
-
-    private GameActivity mActivity = null;
-
-    private SensorManager mManager = null;
-    private Sensor mAccelerometer = null;
+    private Ball mBall              = null;
+    private List<Bloc> mBlocks      = null;
+    private GameActivity mActivity  = null;
+    private SensorManager mManager  = null;
+    private Sensor mAccelerometer   = null;
 
     private final SensorEventListener mSensorEventListener = new SensorEventListener() {
 
         /**
-         * Sensor change event listener.
+         * Sensor change event listener for game.
          * Triggered when sensor capture data.
          *
          * @param pEvent Sensor event object.
@@ -105,6 +96,27 @@ public class PhysicalGameEngine {
         mActivity = pView;
         mManager = (SensorManager) mActivity.getBaseContext().getSystemService(Service.SENSOR_SERVICE);
         mAccelerometer = mManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+    }
+
+    /**
+     * Return ball object
+     *
+     * @return Ball object
+     * @see Ball
+     */
+    public Ball getBall() {
+        return mBall;
+    }
+
+    /**
+     * Set ball of the game
+     *
+     * @param pBall New ball object
+     * @return Nothing.
+     * @see Ball
+     */
+    public void setBall(Ball pBall) {
+        this.mBall = pBall;
     }
 
     /**

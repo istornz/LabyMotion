@@ -10,7 +10,6 @@ import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
 import java.util.List;
 
@@ -23,19 +22,17 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
     private static final String TAG = "Game";
 
-    // Id of the victory dialog
-    public static final int VICTORY_DIALOG = 0;
-
-    // Id of the defeat dialog
-    public static final int DEFEAT_DIALOG = 1;
+    // Id of dialog
+    public static final int VICTORY_DIALOG  = 0;
+    public static final int DEFEAT_DIALOG   = 1;
 
     // Define screen height ratio
     private static final int SCREEN_HEIGHT_RATION = 143;
 
     // Definition of game objects
-    private PhysicalGameEngine mEngine = null;
-    private GraphicGameEngine mView = null;
-    private Ball mBall = null;
+    private PhysicalGameEngine mEngine  = null;
+    private GraphicGameEngine mView     = null;
+    private Ball mBall                  = null;
 
     // Sensors
     private SensorManager mSensorManager;
@@ -51,7 +48,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
 
         // Init sensor manager
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensorManager      = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mLuminositySensor   = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         mMagneticSensor     = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 
@@ -147,7 +144,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 float xMagnetic = sensorEvent.values[0];
                 float yMagnetic = sensorEvent.values[1];
                 float zMagnetic = sensorEvent.values[2];
-                mMagnetic = Math.sqrt((double)(xMagnetic*xMagnetic + yMagnetic*yMagnetic + zMagnetic*zMagnetic));
+                mMagnetic = Math.sqrt((double)(xMagnetic * xMagnetic + yMagnetic * yMagnetic + zMagnetic * zMagnetic));
                 mBall.setBallColor(mMagnetic);
         }
     }
