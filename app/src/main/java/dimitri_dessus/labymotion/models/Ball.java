@@ -11,11 +11,11 @@ import android.util.Log;
 
 public class Ball {
     // Radius of the ball
-    public static float RADIUS = 10.0f;
-    private int ballColor = Color.GREEN;
+    public static float RADIUS  = 10.0f;
+    private int ballColor       = Color.GREEN;
 
     // Max speed of ball
-    private static final float MAX_SPEED = 20.0f;
+    private static final float MAX_SPEED = 30.0f;
 
     // Slow down ball
     private static final float COMPENSATOR = 8.0f;
@@ -29,22 +29,16 @@ public class Ball {
     // Rect collision
     private RectF mRectangle = null;
 
-    // X coordinate
+    // Coordinates X and Y
     private float mX;
-
-    // Y coordinates
     private float mY;
 
-    // Axis X speed
+    // Axis speed
     private float mSpeedX = 0;
-
-    // Axis Y speed
     private float mSpeedY = 0;
 
-    // Screen width size
+    // Screen size
     private int mWidth = -1;
-
-    // Screen height size
     private int mHeight = -1;
 
     /**
