@@ -9,7 +9,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
 
 import dimitri_dessus.labymotion.GameActivity;
 import dimitri_dessus.labymotion.models.Ball;

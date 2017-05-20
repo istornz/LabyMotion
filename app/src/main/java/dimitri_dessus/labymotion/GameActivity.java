@@ -24,6 +24,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     public static final int VICTORY_DIALOG  = 0;
     public static final int DEFEAT_DIALOG   = 1;
     public static final int WALKING_DIALOG  = 2;
+    private double tsWalkingDialog          = 0.0f;
 
     // Define screen height ratio
     private static final int SCREEN_HEIGHT_RATION = 143;
@@ -96,6 +97,11 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void showInfoDialog(int id) {
+        double currentTimestamp = this.getCurrentTimestamp();
+
+        if(id == WALKING_DIALOG && this.tsWalkingDialog > currentTimestamp)
+            return;
+
         // Show dialog when event triggered
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -133,10 +139,12 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                         .setNeutralButton(R.string.stop_moving, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
                                 mEngine.resume();
                             }
                         });
+
+                // Add 3 seconds to timestamp before new notification
+                this.tsWalkingDialog = currentTimestamp + 3;
                 break;
             default:
                 break;
@@ -168,5 +176,9 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
+    }
+
+    private double getCurrentTimestamp() {
+        return System.currentTimeMillis() / 1000;
     }
 }
