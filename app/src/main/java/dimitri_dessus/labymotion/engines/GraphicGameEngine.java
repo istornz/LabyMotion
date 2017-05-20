@@ -20,8 +20,8 @@ import dimitri_dessus.labymotion.models.Bloc;
 
 public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Callback {
 
-    private static final String TAG = "GraphicGameEngine";
-    public static final int SURFACE_RATIO = 28;
+    private static final String TAG         = "GraphicGameEngine";
+    public static final int SURFACE_RATIO   = 28;
 
     private final SurfaceHolder mSurfaceHolder;
     private final DrawingThread mThread;
@@ -171,11 +171,12 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
                 }
 
                 // Set FPS (images per second) by using sleep method
+                /*
                 try {
                     Thread.sleep(20);
                 } catch (InterruptedException e) {
                     Log.d(TAG, "Error executing sleep method");
-                }
+                }*/
             }
         }
     }

@@ -10,7 +10,6 @@ import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
 import java.util.List;
 
@@ -21,26 +20,24 @@ import dimitri_dessus.labymotion.models.Bloc;
 
 public class GameActivity extends AppCompatActivity implements SensorEventListener {
 
-    private static final String TAG = "Game";
-
-    // Id of the victory dialog
-    public static final int VICTORY_DIALOG = 0;
-
-    // Id of the defeat dialog
-    public static final int DEFEAT_DIALOG = 1;
+    // Id of dialog
+    public static final int VICTORY_DIALOG  = 0;
+    public static final int DEFEAT_DIALOG   = 1;
+    public static final int WALKING_DIALOG  = 2;
+    private double tsWalkingDialog          = 0.0f;
 
     // Define screen height ratio
     private static final int SCREEN_HEIGHT_RATION = 143;
 
     // Definition of game objects
-    private PhysicalGameEngine mEngine = null;
-    private GraphicGameEngine mView = null;
-    private Ball mBall = null;
+    private PhysicalGameEngine mEngine  = null;
+    private GraphicGameEngine mView     = null;
+    private Ball mBall                  = null;
 
     // Sensors
-    private SensorManager mSensorManager;
-    private Sensor mLuminositySensor;
-    private Sensor mMagneticSensor;
+    private SensorManager mSensorManager    = null;
+    private Sensor mLuminositySensor        = null;
+    private Sensor mMagneticSensor          = null;
 
     // Sensors vars
     private float mLuminosity;
@@ -51,12 +48,12 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
 
         // Init sensor manager
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensorManager      = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mLuminositySensor   = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         mMagneticSensor     = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 
         // Init graphic game engine
-        mView = new GraphicGameEngine(this);
+        mView   = new GraphicGameEngine(this);
         mEngine = new PhysicalGameEngine(this);
         setContentView(mView);
 
@@ -100,6 +97,11 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void showInfoDialog(int id) {
+        double currentTimestamp = this.getCurrentTimestamp();
+
+        if(id == WALKING_DIALOG && this.tsWalkingDialog > currentTimestamp)
+            return;
+
         // Show dialog when event triggered
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -118,7 +120,6 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                             }
                         });
                 break;
-
             case DEFEAT_DIALOG:
                 builder.setCancelable(false)
                         .setMessage(R.string.defeat_msg)
@@ -130,6 +131,23 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                                 mEngine.resume();
                             }
                         });
+                break;
+            case WALKING_DIALOG:
+                builder.setCancelable(false)
+                        .setMessage(R.string.moving_msg)
+                        .setTitle(R.string.moving_title)
+                        .setNeutralButton(R.string.stop_moving, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mEngine.resume();
+                            }
+                        });
+
+                // Add 3 seconds to timestamp before new notification
+                this.tsWalkingDialog = currentTimestamp + 3;
+                break;
+            default:
+                break;
         }
 
         builder.show();
@@ -147,13 +165,20 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 float xMagnetic = sensorEvent.values[0];
                 float yMagnetic = sensorEvent.values[1];
                 float zMagnetic = sensorEvent.values[2];
-                mMagnetic = Math.sqrt((double)(xMagnetic*xMagnetic + yMagnetic*yMagnetic + zMagnetic*zMagnetic));
+                mMagnetic = Math.sqrt((double)(xMagnetic * xMagnetic + yMagnetic * yMagnetic + zMagnetic * zMagnetic));
                 mBall.setBallColor(mMagnetic);
+                break;
+            default:
+                break;
         }
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
+    }
+
+    private double getCurrentTimestamp() {
+        return System.currentTimeMillis() / 1000;
     }
 }
