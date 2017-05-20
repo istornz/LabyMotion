@@ -5,7 +5,7 @@
     <string name="restart_game">I want to restart !</string>
     <string name="defeat_title">You have lost …</string>
     <string name="defeat_msg">But you can try again if you want :)</string>
-    <string name="moving_msg">You are moving in real life !</string>
+    <string name="moving_msg">You are moving in real life !\\nSo the game is now paused</string>
     <string name="moving_title">Information</string>
-    <string name="stop_moving">Excuse me :)</string>
+    <string name="stop_moving">I\'m ready !</string>
 </resources>
