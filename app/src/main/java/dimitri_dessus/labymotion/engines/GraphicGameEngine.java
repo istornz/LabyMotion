@@ -171,11 +171,12 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
                 }
 
                 // Set FPS (images per second) by using sleep method
+                /*
                 try {
                     Thread.sleep(20);
                 } catch (InterruptedException e) {
                     Log.d(TAG, "Error executing sleep method");
-                }
+                }*/
             }
         }
     }
