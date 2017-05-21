@@ -44,7 +44,6 @@ public class PhysicalGameEngine implements SensorEventListener {
      * Constructor of PhysicalGameEngine class
      *
      * @param pView Main activity of the game.
-     * @return Nothing.
      * @see GameActivity
      */
     public PhysicalGameEngine(GameActivity pView) {
@@ -60,7 +59,6 @@ public class PhysicalGameEngine implements SensorEventListener {
      * Triggered when sensor capture data.
      *
      * @param pEvent Sensor event object.
-     * @return Nothing.
      * @see SensorEvent
      */
     @Override
@@ -108,7 +106,7 @@ public class PhysicalGameEngine implements SensorEventListener {
 
             // If limit exceed, display walking alert
             if(accResult > ACC_LIMIT) {
-                mActivity.showInfoDialog(mActivity.WALKING_DIALOG);
+                mActivity.showInfoDialog(GameActivity.WALKING_DIALOG);
             }
 
             // Resetting all helpers vars
@@ -124,7 +122,6 @@ public class PhysicalGameEngine implements SensorEventListener {
      *
      * @param pSensor Sensor object.
      * @param pAccuracy New accuracy value.
-     * @return Nothing.
      * @see Sensor
      */
     @Override
@@ -132,8 +129,6 @@ public class PhysicalGameEngine implements SensorEventListener {
 
     /**
      * Reset ball to original position
-     *
-     * @return Nothing.
      */
     public void reset() {
         mBall.reset();
@@ -141,8 +136,6 @@ public class PhysicalGameEngine implements SensorEventListener {
 
     /**
      * Unregister event listener on accelerometer captor
-     *
-     * @return Nothing.
      */
     public void stop() {
 
@@ -152,8 +145,6 @@ public class PhysicalGameEngine implements SensorEventListener {
 
     /**
      * Attach accelerometer sensor to the event listener (to start tracking data)
-     *
-     * @return Nothing.
      */
     public void resume() {
 
@@ -162,20 +153,9 @@ public class PhysicalGameEngine implements SensorEventListener {
     }
 
     /**
-     * Return ball object
-     *
-     * @return Ball object
-     * @see Ball
-     */
-    public Ball getBall() {
-        return mBall;
-    }
-
-    /**
      * Set ball of the game
      *
      * @param pBall New ball object
-     * @return Nothing.
      * @see Ball
      */
     public void setBall(Ball pBall) {

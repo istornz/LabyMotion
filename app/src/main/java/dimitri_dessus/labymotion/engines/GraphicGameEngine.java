@@ -21,7 +21,7 @@ import dimitri_dessus.labymotion.models.Bloc;
 public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Callback {
 
     private static final String TAG         = "GraphicGameEngine";
-    public static final int SURFACE_RATIO   = 28;
+    public static final int SURFACE_RATIO   = 25;
 
     private final SurfaceHolder mSurfaceHolder;
     private final DrawingThread mThread;
@@ -35,7 +35,6 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
      * Constructor of GraphicGameEngine class.
      *
      * @param pContext Context of the activity.
-     * @return Nothing.
      * @see Context
      */
     public GraphicGameEngine(Context pContext) {
@@ -55,7 +54,6 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
      * Method will be called on every frame calculated.
      *
      * @param pCanvas Canvas to draw.
-     * @return Nothing.
      * @see Context
      */
     @Override
@@ -96,7 +94,6 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
      * @param pFormat Format of the new surface.
      * @param pWidth Width of the new surface.
      * @param pHeight Height of the new surface.
-     * @return Nothing.
      * @see SurfaceHolder
      */
     @Override
@@ -106,7 +103,6 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
      * Event triggered when a new surface is created.
      *
      * @param pHolder New surface holder object.
-     * @return Nothing.
      * @see SurfaceHolder
      */
     @Override
@@ -124,7 +120,6 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
      * Event triggered when surface is destroyed.
      *
      * @param pHolder Surface holder object.
-     * @return Nothing.
      * @see SurfaceHolder
      */
     @Override
@@ -151,7 +146,6 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
         /**
          * When the thread is started, run this method.
          *
-         * @return Nothing.
          * @see SurfaceHolder
          */
         @Override
@@ -169,33 +163,14 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
                     if (canvas != null)
                         mSurfaceHolder.unlockCanvasAndPost(canvas);
                 }
-
-                // Set FPS (images per second) by using sleep method
-                /*
-                try {
-                    Thread.sleep(20);
-                } catch (InterruptedException e) {
-                    Log.d(TAG, "Error executing sleep method");
-                }*/
             }
         }
-    }
-
-    /**
-     * Getter of the Ball property object.
-     *
-     * @return The ball object.
-     * @see Ball
-     */
-    public Ball getBall() {
-        return mBall;
     }
 
     /**
      * Setter of the Ball property object.
      *
      * @param pBall New ball object
-     * @return Nothing.
      * @see Ball
      */
     public void setBall(Ball pBall) {
@@ -203,20 +178,9 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
     }
 
     /**
-     * Getter of all blocs (pattern of the game).
-     *
-     * @return Bloc list object as an array.
-     * @see Bloc
-     */
-    public List<Bloc> getBlocks() {
-        return mBlocks;
-    }
-
-    /**
      * Setter of all blocs (pattern of the game).
      *
      * @param pBlocks The list of bloc object (pattern of the game)
-     * @return The ball object.
      * @see Bloc
      */
     public void setBlocks(List<Bloc> pBlocks) {
@@ -225,8 +189,6 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
 
     /**
      * Set surface color according to luminosity level.
-     *
-     * @return Nothing.
      */
     public void setSurfaceBgColor(float luminosity) {
 
