@@ -106,24 +106,6 @@ public class Ball {
     }
 
     /**
-     * Invert X axis speed (when direction changed on bounds)
-     *
-     * @see Ball
-     */
-    public void changeXSpeed() {
-        mSpeedX = -mSpeedX;
-    }
-
-    /**
-     * Invert Y axis speed (when direction changed on bounds)
-     *
-     * @see Ball
-     */
-    public void changeYSpeed() {
-        mSpeedY = -mSpeedY;
-    }
-
-    /**
      * Set the height of the ball
      *
      * @param pHeight New height value of the ball

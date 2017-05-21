@@ -153,16 +153,6 @@ public class PhysicalGameEngine implements SensorEventListener {
     }
 
     /**
-     * Return ball object
-     *
-     * @return Ball object
-     * @see Ball
-     */
-    public Ball getBall() {
-        return mBall;
-    }
-
-    /**
      * Set ball of the game
      *
      * @param pBall New ball object

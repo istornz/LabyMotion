@@ -163,26 +163,8 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
                     if (canvas != null)
                         mSurfaceHolder.unlockCanvasAndPost(canvas);
                 }
-
-                // Set FPS (images per second) by using sleep method
-                /*
-                try {
-                    Thread.sleep(20);
-                } catch (InterruptedException e) {
-                    Log.d(TAG, "Error executing sleep method");
-                }*/
             }
         }
-    }
-
-    /**
-     * Getter of the Ball property object.
-     *
-     * @return The ball object.
-     * @see Ball
-     */
-    public Ball getBall() {
-        return mBall;
     }
 
     /**
@@ -193,16 +175,6 @@ public class GraphicGameEngine extends SurfaceView implements SurfaceHolder.Call
      */
     public void setBall(Ball pBall) {
         this.mBall = pBall;
-    }
-
-    /**
-     * Getter of all blocs (pattern of the game).
-     *
-     * @return Bloc list object as an array.
-     * @see Bloc
-     */
-    public List<Bloc> getBlocks() {
-        return mBlocks;
     }
 
     /**
