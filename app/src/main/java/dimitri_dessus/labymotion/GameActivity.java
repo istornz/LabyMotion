@@ -7,6 +7,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -38,6 +39,9 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private SensorManager mSensorManager    = null;
     private Sensor mLuminositySensor        = null;
     private Sensor mMagneticSensor          = null;
+
+    // Sound
+    private MediaPlayer mediaPlayer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,10 +105,12 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         // Show dialog when event triggered
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
+        int soundToPlay;
         mEngine.stop();
 
         switch(id) {
             case VICTORY_DIALOG:
+                soundToPlay = R.raw.win;
                 builder.setCancelable(false)
                         .setMessage(R.string.victory_title)
                         .setTitle(R.string.victory_msg)
@@ -117,6 +123,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                         });
                 break;
             case DEFEAT_DIALOG:
+                soundToPlay = R.raw.loose;
                 builder.setCancelable(false)
                         .setMessage(R.string.defeat_msg)
                         .setTitle(R.string.defeat_title)
@@ -129,6 +136,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                         });
                 break;
             case WALKING_DIALOG:
+                soundToPlay = R.raw.walking;
                 builder.setCancelable(false)
                         .setMessage(R.string.moving_msg)
                         .setTitle(R.string.moving_title)
@@ -143,10 +151,28 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 this.tsWalkingDialog = currentTimestamp + 3;
                 break;
             default:
+                soundToPlay = R.raw.loose;
                 break;
         }
 
         builder.show();
+
+        mediaPlayer = MediaPlayer.create(this, soundToPlay);
+
+        // Set completion handler on media player
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            public void onCompletion(MediaPlayer mp) {
+                mediaPlayer.release();
+            }
+        });
+
+        // Pause if media already played or start it
+        try {
+            if (mediaPlayer.isPlaying()) {
+                mediaPlayer.stop();
+            }
+            mediaPlayer.start();
+        } catch(Exception e) { e.printStackTrace(); }
     }
 
     @Override
