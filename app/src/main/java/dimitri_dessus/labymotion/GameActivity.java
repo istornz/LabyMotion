@@ -11,6 +11,7 @@ import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import java.util.List;
 
@@ -158,11 +159,20 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         builder.show();
 
         mediaPlayer = MediaPlayer.create(this, soundToPlay);
+
+        // Set completion handler on media player
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            public void onCompletion(MediaPlayer mp) {
+                mediaPlayer.release();
+            }
+        });
+
+        // Pause if media already played or start it
         try {
             if (mediaPlayer.isPlaying()) {
                 mediaPlayer.stop();
-                mediaPlayer.release();
-            } mediaPlayer.start();
+            }
+            mediaPlayer.start();
         } catch(Exception e) { e.printStackTrace(); }
     }
 
