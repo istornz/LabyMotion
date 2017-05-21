@@ -39,7 +39,6 @@ public class Bloc {
      * @param pType Type of the bloc.
      * @param pX Position of the bloc in the X axis.
      * @param pY Position of the bloc in the Y axis.
-     * @return Nothing.
      * @see Type
      */
     public Bloc(Type pType, int pX, int pY) {

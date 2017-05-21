@@ -2,7 +2,6 @@ package dimitri_dessus.labymotion.models;
 
 import android.graphics.Color;
 import android.graphics.RectF;
-import android.util.Log;
 
 /**
  * Created by Dimitri on 14/04/2017.
@@ -45,7 +44,6 @@ public class Ball {
      * Setter of initial rectangle (start point)
      *
      * @param pInitialRectangle Rectangle shape as starting point.
-     * @return Nothing.
      * @see RectF
      */
     public void setInitialRectangle(RectF pInitialRectangle) {
@@ -67,7 +65,6 @@ public class Ball {
      * Set X position (start point)
      *
      * @param pPosX X axis position.
-     * @return Nothing.
      */
     private void setPosX(float pPosX) {
         mX = pPosX;
@@ -96,7 +93,6 @@ public class Ball {
      * Set Y position (start point)
      *
      * @param pPosY Y axis position.
-     * @return Nothing.
      */
     private void setPosY(float pPosY) {
         mY = pPosY;
@@ -112,7 +108,6 @@ public class Ball {
     /**
      * Invert X axis speed (when direction changed on bounds)
      *
-     * @return Nothing.
      * @see Ball
      */
     public void changeXSpeed() {
@@ -122,7 +117,6 @@ public class Ball {
     /**
      * Invert Y axis speed (when direction changed on bounds)
      *
-     * @return Nothing.
      * @see Ball
      */
     public void changeYSpeed() {
@@ -133,7 +127,6 @@ public class Ball {
      * Set the height of the ball
      *
      * @param pHeight New height value of the ball
-     * @return Nothing.
      * @see Ball
      */
     public void setHeight(int pHeight) {
@@ -144,7 +137,6 @@ public class Ball {
      * Set the width of the ball
      *
      * @param pWidth New width value of the ball
-     * @return Nothing.
      * @see Ball
      */
     public void setWidth(int pWidth) {
@@ -154,7 +146,6 @@ public class Ball {
     /**
      * Constructor of Ball object
      *
-     * @return Nothing.
      * @see Ball
      */
     public Ball() {
@@ -194,7 +185,6 @@ public class Ball {
     /**
      * Reset ball to original position
      *
-     * @return Nothing.
      */
     public void reset() {
         mSpeedX = 0;
@@ -216,7 +206,6 @@ public class Ball {
      * Change ball color according to magnetic field level.
      *
      * @param magneticField Magnetic level captured by the device.
-     * @return Nothing.
      */
     public void setBallColor(double magneticField) {
 

@@ -39,10 +39,6 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private Sensor mLuminositySensor        = null;
     private Sensor mMagneticSensor          = null;
 
-    // Sensors vars
-    private float mLuminosity;
-    private double mMagnetic;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -158,14 +154,14 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
         switch (sensorEvent.sensor.getType()) {
             case Sensor.TYPE_LIGHT:
-                mLuminosity = sensorEvent.values[0];
+                float mLuminosity = sensorEvent.values[0];
                 mView.setSurfaceBgColor(mLuminosity);
                 break;
             case Sensor.TYPE_MAGNETIC_FIELD:
                 float xMagnetic = sensorEvent.values[0];
                 float yMagnetic = sensorEvent.values[1];
                 float zMagnetic = sensorEvent.values[2];
-                mMagnetic = Math.sqrt((double)(xMagnetic * xMagnetic + yMagnetic * yMagnetic + zMagnetic * zMagnetic));
+                double mMagnetic = Math.sqrt((double) (xMagnetic * xMagnetic + yMagnetic * yMagnetic + zMagnetic * zMagnetic));
                 mBall.setBallColor(mMagnetic);
                 break;
             default:
