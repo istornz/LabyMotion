@@ -11,7 +11,6 @@ import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private Sensor mMagneticSensor          = null;
 
     // Sound
-    MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
